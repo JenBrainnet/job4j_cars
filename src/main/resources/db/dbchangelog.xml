@@ -12,4 +12,7 @@
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
+    <include file="scripts/001_ddl_create_auto_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/002_ddl_create_auto_post_table.sql" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
