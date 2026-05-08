@@ -1,6 +1,7 @@
 package ru.job4j.cars.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -8,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "auto_post")
+@Table(name = "posts")
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer id;
 
     private String description;
@@ -21,11 +24,15 @@ public class Post {
     private LocalDateTime created;
 
     @ManyToOne
-    @JoinColumn(name = "auto_user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "auto_post_id")
+    @JoinColumn(name = "post_id")
     private List<PriceHistory> priceHistories = new ArrayList<>();
 
     @ManyToMany

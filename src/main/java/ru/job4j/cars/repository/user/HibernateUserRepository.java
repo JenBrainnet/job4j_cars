@@ -1,14 +1,17 @@
-package ru.job4j.cars.repository;
+package ru.job4j.cars.repository.user;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 import ru.job4j.cars.model.User;
+import ru.job4j.cars.repository.command.CrudRepository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 @AllArgsConstructor
-public class UserRepository {
+public class HibernateUserRepository implements UserRepository {
 
     private final CrudRepository crudRepository;
 
@@ -17,6 +20,7 @@ public class UserRepository {
      * @param user user.
      * @return user with id.
      */
+    @Override
     public User create(User user) {
         crudRepository.run(session -> session.persist(user));
         return user;
@@ -26,6 +30,7 @@ public class UserRepository {
      * Update a user in the database.
      * @param user user.
      */
+    @Override
     public void update(User user) {
         crudRepository.run(session -> session.merge(user));
     }
@@ -34,9 +39,10 @@ public class UserRepository {
      * Delete a user by id.
      * @param userId ID
      */
+    @Override
     public void delete(Integer userId) {
         crudRepository.run(
-                "DELETE User WHERE id = :id",
+                "DELETE FROM User WHERE id = :id",
                 Map.of("id", userId)
         );
     }
@@ -45,6 +51,7 @@ public class UserRepository {
      * Get the list of users sorted by id.
      * @return list of users.
      */
+    @Override
     public List<User> findAllOrderById() {
         return crudRepository.query("FROM User ORDER BY id ASC", User.class);
     }
@@ -54,6 +61,7 @@ public class UserRepository {
      * @param userId user ID
      * @return user.
      */
+    @Override
     public Optional<User> findById(Integer userId) {
         return crudRepository.optional(
                 "FROM User WHERE id = :id", User.class,
@@ -66,6 +74,7 @@ public class UserRepository {
      * @param key key
      * @return list of users.
      */
+    @Override
     public List<User> findByLikeLogin(String key) {
         return crudRepository.query(
                 "FROM User WHERE login LIKE :key ORDER BY id ASC", User.class,
@@ -78,6 +87,7 @@ public class UserRepository {
      * @param login login.
      * @return Optional or user.
      */
+    @Override
     public Optional<User> findByLogin(String login) {
         return crudRepository.optional(
                 "FROM User WHERE login = :login", User.class,

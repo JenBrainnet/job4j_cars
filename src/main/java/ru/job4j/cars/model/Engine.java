@@ -4,23 +4,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "price_history")
+@Table(name = "engines")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PriceHistory {
+public class Engine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
-    private Long before;
-
-    private Long after;
-
-    private LocalDateTime created;
+    private String name;
 
 }
