@@ -35,6 +35,10 @@ public class Post {
     @JoinColumn(name = "post_id")
     private List<PriceHistory> priceHistories = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<Photo> photos = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "post_subscribers",
