@@ -14,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class HibernatePostRepository implements PostRepository {
 
-    private CrudRepository crudRepository;
+    private final CrudRepository crudRepository;
 
     @Override
     public Post create(Post post) {
@@ -42,8 +42,8 @@ public class HibernatePostRepository implements PostRepository {
         return crudRepository.query(
                 "SELECT DISTINCT p FROM Post p "
                         + "JOIN FETCH p.user "
-                        + "LEFT JOIN FETCH p.car c "
-                        + "LEFT JOIN FETCH c.engine "
+                        + "JOIN FETCH p.car c "
+                        + "JOIN FETCH c.engine "
                         + "LEFT JOIN FETCH p.photos "
                         + "ORDER BY p.id ASC",
                 Post.class
@@ -55,8 +55,8 @@ public class HibernatePostRepository implements PostRepository {
         return crudRepository.optional(
                 "SELECT DISTINCT p FROM Post p "
                         + "JOIN FETCH p.user "
-                        + "LEFT JOIN FETCH p.car c "
-                        + "LEFT JOIN FETCH c.engine "
+                        + "JOIN FETCH p.car c "
+                        + "JOIN FETCH c.engine "
                         + "LEFT JOIN FETCH p.photos "
                         + "WHERE p.id = :id",
                 Post.class,
@@ -69,8 +69,8 @@ public class HibernatePostRepository implements PostRepository {
         return crudRepository.query(
                 "SELECT DISTINCT p FROM Post p "
                         + "JOIN FETCH p.user "
-                        + "LEFT JOIN FETCH p.car c "
-                        + "LEFT JOIN FETCH c.engine "
+                        + "JOIN FETCH p.car c "
+                        + "JOIN FETCH c.engine "
                         + "LEFT JOIN FETCH p.photos "
                         + "WHERE p.created >= :dateFrom "
                         + "ORDER BY p.created DESC",
@@ -84,8 +84,8 @@ public class HibernatePostRepository implements PostRepository {
         return crudRepository.query(
                 "SELECT DISTINCT p FROM Post p "
                         + "JOIN FETCH p.user "
-                        + "LEFT JOIN FETCH p.car c "
-                        + "LEFT JOIN FETCH c.engine "
+                        + "JOIN FETCH p.car c "
+                        + "JOIN FETCH c.engine "
                         + "JOIN FETCH p.photos "
                         + "ORDER BY p.created DESC",
                 Post.class

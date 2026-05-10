@@ -20,8 +20,8 @@ public class Car {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "engine_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "engine_id", nullable = false)
     private Engine engine;
 
     @ManyToMany(fetch = FetchType.LAZY)

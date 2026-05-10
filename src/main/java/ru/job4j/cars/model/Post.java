@@ -23,12 +23,12 @@ public class Post {
 
     private LocalDateTime created;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
     @OneToMany(cascade = CascadeType.ALL)

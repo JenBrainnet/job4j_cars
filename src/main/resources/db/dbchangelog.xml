@@ -25,5 +25,6 @@
     <include file="scripts/011_ddl_create_histories_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/012_ddl_alter_posts_add_car_id.sql" relativeToChangelogFile="true"/>
     <include file="scripts/013_ddl_create_photos_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/014_ddl_alter_posts_set_car_id_not_null.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
